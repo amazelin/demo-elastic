@@ -28,4 +28,9 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findByFirstname(firstname, pageable);
     }
 
+    @Override
+    public Page<Client> findByLastname(String lastname, Pageable pageable) {
+        return clientRepository.findByLastname(lastname,pageable);
+    }
+
 }

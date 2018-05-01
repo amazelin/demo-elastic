@@ -10,5 +10,5 @@ public interface ClientRepository extends ElasticsearchRepository<Client, String
     Page<Client> findByFirstname(String firstname, Pageable pageable);
 
 
-
+    Page<Client> findByLastname(String lastname, Pageable pageable);
 }

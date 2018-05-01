@@ -9,4 +9,6 @@ public interface ClientService {
 
     Page<Client> findByFirstname(String firstname, Pageable pageable);
 
+    Page<Client> findByLastname(String lastname, Pageable pageable);
+
 }

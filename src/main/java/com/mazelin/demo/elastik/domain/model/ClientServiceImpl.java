@@ -1,4 +1,4 @@
-package com.mazelin.demo.elastik;
+package com.mazelin.demo.elastik.domain.model;
 
 
 import com.mazelin.demo.elastik.repository.ClientRepository;

@@ -1,6 +1,6 @@
 package com.mazelin.demo.elastik.repository;
 
-import com.mazelin.demo.elastik.Client;
+import com.mazelin.demo.elastik.domain.model.Client;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;

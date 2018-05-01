@@ -1,4 +1,4 @@
-package com.mazelin.demo.elastik;
+package com.mazelin.demo.elastik.domain.model;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

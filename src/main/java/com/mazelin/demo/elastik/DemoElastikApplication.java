@@ -1,24 +1,26 @@
 package com.mazelin.demo.elastik;
 
+import com.mazelin.demo.elastik.domain.model.Client;
+import com.mazelin.demo.elastik.domain.model.ClientService;
 import org.elasticsearch.common.inject.Inject;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
-import java.util.function.Consumer;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 @SpringBootApplication
 public class DemoElastikApplication implements CommandLineRunner {
 
 
+	private final ElasticsearchOperations elasticsearchOperations;
 	private final ClientService clientService;
 
 
 	@Inject
-	public DemoElastikApplication(ClientService clientService) {
+	public DemoElastikApplication(@Qualifier("appElasticSearch") ElasticsearchOperations elasticsearchOperations, ClientService clientService) {
+		this.elasticsearchOperations = elasticsearchOperations;
 		this.clientService = clientService;
 	}
 
@@ -28,9 +30,13 @@ public class DemoElastikApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		clientService.save(new Client("123", "Mazelin", "Arnaud"));
 
-		clientService.findByFirstname("Arnaud", PageRequest.of(1, 10)).forEach(client -> System.out.print(client.toString()));
+		elasticsearchOperations.deleteIndex(Client.class);
+		clientService.save(new Client("123", "Mazelin", "Sophie"));
+		clientService.save(new Client("456", "Mazelin", "Arnaud"));
+
+		clientService.findByFirstname("Arnaud", Pageable.unpaged()).forEach(System.out::println);
+		clientService.findByLastname("Mazelin", Pageable.unpaged()).forEach(System.out::println);
 
 	}
 }

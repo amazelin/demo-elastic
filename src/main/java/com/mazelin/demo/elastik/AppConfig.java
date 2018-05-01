@@ -20,7 +20,7 @@ import java.net.UnknownHostException;
 public class AppConfig {
 
 
-    @Bean
+    @Bean(name = "appElasticSearch")
     public ElasticsearchOperations elasticSearchTemplate() throws UnknownHostException {
         return new ElasticsearchTemplate(client());
     }

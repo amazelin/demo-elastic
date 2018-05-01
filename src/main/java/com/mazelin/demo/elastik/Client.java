@@ -2,8 +2,6 @@ package com.mazelin.demo.elastik;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Document(indexName = "gp", type = "client")
 public class Client {
@@ -18,6 +16,9 @@ public class Client {
     //@Field(type = FieldType.Nested)
     //private Portfolio portfolio;
 
+
+    public Client() {
+    }
 
     public Client(String id, String lastname, String firstname) {
         this.id = id;

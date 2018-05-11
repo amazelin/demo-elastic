@@ -13,8 +13,6 @@ public class Client {
 
     private String firstname;
 
-    //@Field(type = FieldType.Nested)
-    //private Portfolio portfolio;
 
 
     public Client() {

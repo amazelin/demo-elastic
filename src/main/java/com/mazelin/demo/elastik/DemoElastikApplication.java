@@ -1,13 +1,13 @@
 package com.mazelin.demo.elastik;
 
 import com.mazelin.demo.elastik.domain.model.Client;
-import com.mazelin.demo.elastik.domain.model.ClientService;
+import com.mazelin.demo.elastik.domain.model.Mandate;
+import com.mazelin.demo.elastik.domain.model.MandateService;
 import org.elasticsearch.common.inject.Inject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 @SpringBootApplication
@@ -15,13 +15,13 @@ public class DemoElastikApplication implements CommandLineRunner {
 
 
 	private final ElasticsearchOperations elasticsearchOperations;
-	private final ClientService clientService;
+	private final MandateService mandateService;
 
 
 	@Inject
-	public DemoElastikApplication(@Qualifier("appElasticSearch") ElasticsearchOperations elasticsearchOperations, ClientService clientService) {
+	public DemoElastikApplication(@Qualifier("appElasticSearch") ElasticsearchOperations elasticsearchOperations, MandateService mandateService) {
 		this.elasticsearchOperations = elasticsearchOperations;
-		this.clientService = clientService;
+		this.mandateService = mandateService;
 	}
 
 	public static void main(String[] args) {
@@ -31,12 +31,20 @@ public class DemoElastikApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		elasticsearchOperations.deleteIndex(Client.class);
-		clientService.save(new Client("123", "Mazelin", "Sophie"));
-		clientService.save(new Client("456", "Mazelin", "Arnaud"));
+//		elasticsearchOperations.createIndex("gp");
 
-		clientService.findByFirstname("Arnaud", Pageable.unpaged()).forEach(System.out::println);
-		clientService.findByLastname("Mazelin", Pageable.unpaged()).forEach(System.out::println);
+//		elasticsearchOperations.deleteIndex(Client.class);
+//		elasticsearchOperations.deleteIndex(Mandate.class);
+		elasticsearchOperations.refresh("gp");
+		elasticsearchOperations.refresh(Mandate.class);
 
+		final Client c1 = new Client("123", "Mazelin", "Sophie");
+		final Client c2 = new Client("456", "Mazelin", "Arnaud");
+
+		final Mandate m1 = new Mandate("ABC", "GAO", "CTO", "Mandat 0-30", 150000D, c1);
+		final Mandate m2 = new Mandate("DEF", "GSM", "PEA", "Mandat 70-90", 1857000D, c2);
+
+		mandateService.save(m1);
+		mandateService.save(m2);
 	}
 }

@@ -1,35 +1,39 @@
 package com.mazelin.demo.elastik.controller;
 
 import com.mazelin.demo.elastik.domain.model.Client;
-import com.mazelin.demo.elastik.domain.model.ClientService;
+import com.mazelin.demo.elastik.domain.model.Mandate;
+import com.mazelin.demo.elastik.domain.model.MandateService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @Controller
 public class SearchController {
 
-    private final ClientService clientService;
+    private final MandateService mandateService;
 
-    public SearchController(ClientService clientService) {
-        this.clientService = clientService;
+    public SearchController(MandateService mandateService) {
+
+        this.mandateService = mandateService;
     }
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping(value = "/")
     public String search(Map<String, Object> model) {
         return "search";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public Page<Client> search(String firstname){
+    @PostMapping(value = "/search")
+    public @ResponseBody
+    ResponseEntity<Page<Mandate>> search(@RequestBody SearchCriteria searchCriteria, Errors errors){
 
-        final Page<Client> clients = clientService.findByFirstname(firstname, Pageable.unpaged());
+        final Page<Mandate> clients = mandateService.findById(searchCriteria.getQuery(), Pageable.unpaged());
 
-        return clients;
+        return ResponseEntity.ok(clients);
     }
 }

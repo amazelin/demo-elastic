@@ -4,12 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mazelin</groupId>
-	<artifactId>demo-elastik</artifactId>
+	<artifactId>demo-elastic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<modules>
+		<module>demo-elastic-core</module>
+		<module>demo-elastic-batch</module>
+		<module>demo-elastic-web</module>
+	</modules>
+	<packaging>pom</packaging>
 
-	<name>demo-elastik</name>
-	<description>Demo project for elastik</description>
+	<name>demo-elastic</name>
+	<description>Demo project for elastic</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -27,29 +32,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-            <version>3.3.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
@@ -64,15 +46,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-
 </project>

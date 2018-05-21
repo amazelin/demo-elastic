@@ -1,15 +1,15 @@
 package com.mazelin.demo.elastic.batch.job.indexer;
 
-import com.mazelin.demo.elastic.domain.repository.MandateRepository;
+import com.mazelin.demo.elastic.model.Mandate;
+import com.mazelin.demo.elastic.repository.MandateRepository;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 @Component
-public class MandateElasticWriter implements ItemWriter<MandateInput> {
+public class MandateElasticWriter implements ItemWriter<Mandate> {
 
 
     private final MandateRepository mandateRepository;
@@ -20,9 +20,7 @@ public class MandateElasticWriter implements ItemWriter<MandateInput> {
     }
 
     @Override
-    public void write(List<? extends MandateInput> items) throws Exception {
-
-
-
+    public void write(List<? extends Mandate> items) {
+        mandateRepository.saveAll(items);
     }
 }

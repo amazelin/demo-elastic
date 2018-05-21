@@ -2,6 +2,7 @@ package com.mazelin.demo.elastic.batch.job.indexer;
 
 
 import com.mazelin.demo.elastic.batch.DataSourceConfig;
+import com.mazelin.demo.elastic.model.Mandate;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -20,19 +21,19 @@ import org.springframework.jdbc.core.RowMapper;
 @Configuration
 @EnableBatchProcessing
 @Import({DataSourceConfig.class})
-public class IndexerJobConfiguration {
+public class DBIndexerJobConf {
 
 
     @Autowired
-    JobBuilderFactory jobBuilderFactory;
+    private JobBuilderFactory jobBuilderFactory;
     @Autowired
-    StepBuilderFactory stepBuilderFactory;
+    private StepBuilderFactory stepBuilderFactory;
 
     @Autowired
-    DataSourceConfig dataSourceConfig;
+    private DataSourceConfig dataSourceConfig;
 
     @Autowired
-    MandateElasticWriter mandateElasticWriter;
+    private MandateElasticWriter mandateElasticWriter;
 
 
     @Bean
@@ -43,16 +44,16 @@ public class IndexerJobConfiguration {
     @Bean
     public Step step1() throws Exception {
         return stepBuilderFactory.get("reader")
-                .<MandateInput, MandateInput> chunk(100)
+                .<Mandate, Mandate> chunk(100)
                 .reader(dbReader())
                 .writer(mandateElasticWriter)
                 .build();
     }
 
     @Bean
-    public ItemReader<MandateInput> dbReader() throws Exception {
+    public ItemReader<Mandate> dbReader() throws Exception {
 
-        return new JdbcPagingItemReaderBuilder<MandateInput>()
+        return new JdbcPagingItemReaderBuilder<Mandate>()
                 .dataSource(dataSourceConfig.dataSource())
                 .queryProvider(queryProvider())
                 .rowMapper(rowMapper())
@@ -60,7 +61,7 @@ public class IndexerJobConfiguration {
     }
 
     @Bean
-    public RowMapper<MandateInput> rowMapper() {
+    public RowMapper<Mandate> rowMapper() {
 
         return null;
     }

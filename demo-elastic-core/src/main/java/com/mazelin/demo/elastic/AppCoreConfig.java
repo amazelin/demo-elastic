@@ -15,21 +15,19 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @Configuration
-@EnableElasticsearchRepositories
-public class AppConfig {
+@EnableElasticsearchRepositories(basePackages = {"com.mazelin.demo.elastic.repository"})
+public class AppCoreConfig {
 
 
-    @Bean(name = "appElasticSearch")
-    public ElasticsearchOperations elasticSearchTemplate() throws UnknownHostException {
-        return new ElasticsearchTemplate(client());
+    @Bean
+    public ElasticsearchOperations elasticsearchTemplate(Client client) {
+        return  new ElasticsearchTemplate(client);
     }
 
     @Bean
     public Client client() throws UnknownHostException {
 
         final Settings settings = Settings.builder().put("cluster.name", "gp-cluster").build();
-
-
         TransportClient client = new PreBuiltTransportClient(settings).addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
 
         return client;

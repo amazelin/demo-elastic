@@ -1,35 +1,28 @@
 package com.mazelin.demo.elastic;
 
-import com.mazelin.demo.elastic.model.Client;
-import com.mazelin.demo.elastic.model.Mandate;
-import com.mazelin.demo.elastic.model.MandateService;
-import org.elasticsearch.common.inject.Inject;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 @SpringBootApplication
-public class DemoElastikApplication implements CommandLineRunner {
+public class DemoElastikApplication  {
 
 
-	private final ElasticsearchOperations elasticsearchOperations;
-	private final MandateService mandateService;
+//	private final ElasticsearchOperations elasticsearchOperations;
+//	private final MandateService mandateService;
 
 
-	@Inject
-	public DemoElastikApplication(@Qualifier("appElasticSearch") ElasticsearchOperations elasticsearchOperations, MandateService mandateService) {
-		this.elasticsearchOperations = elasticsearchOperations;
-		this.mandateService = mandateService;
-	}
+//	@Inject
+//	public DemoElastikApplication(@Qualifier("appElasticSearch") ElasticsearchOperations elasticsearchOperations, MandateService mandateService) {
+//		this.elasticsearchOperations = elasticsearchOperations;
+//		this.mandateService = mandateService;
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoElastikApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
+
+	public void run(String... args) {
 
 //		elasticsearchOperations.createIndex("gp");
 

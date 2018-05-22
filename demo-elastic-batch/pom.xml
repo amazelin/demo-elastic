@@ -31,15 +31,16 @@
             <artifactId>demo-elastic-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>com.amundi.architecture-sits</groupId>
             <artifactId>architecture-sits-database</artifactId>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>com.amundi.mediaplus</groupId>
             <artifactId>mediaplus-conf</artifactId>
             <version>1.0-PREPROD-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
     </dependencies>
 </project>

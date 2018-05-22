@@ -10,9 +10,9 @@ import javax.sql.DataSource;
 public class DataSourceConfig {
 
     @Bean
-    public DataSource dataSource() throws NoSuchFieldException, ClassNotFoundException, IllegalAccessException {
+    public DataSource dataSource(DBResourceResolver dbResourceResolver) throws NoSuchFieldException, ClassNotFoundException, IllegalAccessException {
         FieldRetrievingFactoryBean fieldRetrievingFactoryBean = new FieldRetrievingFactoryBean();
-        fieldRetrievingFactoryBean.setStaticField(dbResourceResolverBatch().getDBResourceStaticFieldName());
+        fieldRetrievingFactoryBean.setStaticField(dbResourceResolver.getDBResourceStaticFieldName());
         fieldRetrievingFactoryBean.afterPropertiesSet();
         DataSource dataSource = (DataSource) fieldRetrievingFactoryBean.getObject();
         return dataSource;
@@ -20,6 +20,6 @@ public class DataSourceConfig {
 
     @Bean
     public DBResourceResolver dbResourceResolverBatch() {
-        return new DBResourceResolver("MGS_STAGING");
+        return new DBResourceResolver("MGS_ADMIN");
     }
 }

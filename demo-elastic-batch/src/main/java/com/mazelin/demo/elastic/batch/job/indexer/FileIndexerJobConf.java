@@ -30,13 +30,10 @@ public class FileIndexerJobConf {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
-
-
     @Bean
     public Job indexJob(Step step1) {
-        return jobBuilderFactory.get("indexJob").start(step1).build();
+        return jobBuilderFactory.get("fileIndexJob").start(step1).build();
     }
-
 
     @Bean
     public MandateElasticWriter mandateElasticWriter(MandateRepository mandateRepository) {
@@ -46,22 +43,21 @@ public class FileIndexerJobConf {
     @Bean
     public Step step1(ItemReader<Mandate> reader, ItemWriter<Mandate> writer) {
         return stepBuilderFactory.get("reader")
-                .<Mandate, Mandate>chunk(100)
-                .reader(reader)
-                .writer(writer)
-                .build();
+            .<Mandate, Mandate>chunk(100)
+            .reader(reader)
+            .writer(writer)
+            .build();
     }
 
     @Bean
     public ItemReader<Mandate> fileReader() {
 
-        final DefaultLineMapper lineMapper = new DefaultLineMapper();
         final DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer(";");
         tokenizer.setNames("id", "offer", "structure", "riskProfile", "assets", "firstname", "lastname", "clientId");
 
         return new FlatFileItemReaderBuilder<Mandate>()
                 .linesToSkip(1)
-                .resource(new FileSystemResource("resources/data.csv"))
+                .resource(new FileSystemResource("src/main/resources/data.csv"))
                 .fieldSetMapper(fieldSet -> {
                     Mandate mandate = new Mandate();
                     mandate.setId(fieldSet.readString("id"));

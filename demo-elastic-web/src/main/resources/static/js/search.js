@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#search-form").submit(function (event) {
+    $("#search-form").keyup(function (event) {
         //stop submit the form, we will post it manually.
         event.preventDefault();
         search();

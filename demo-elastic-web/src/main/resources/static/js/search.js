@@ -29,7 +29,6 @@ function search(){
                      getColumn(row.offer) +
                      getColumn(row.structure) +
                      getColumn(row.riskProfile) +
-                     getColumn(row.assets) +
                      '</tr>');
                 });
             },

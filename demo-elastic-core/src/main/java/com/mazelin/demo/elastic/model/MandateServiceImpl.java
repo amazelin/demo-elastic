@@ -25,4 +25,9 @@ public class MandateServiceImpl implements MandateService {
     public Page<Mandate> findById(String id, Pageable pageable) {
         return repository.findById(id, pageable);
     }
+
+    @Override
+    public Page<Mandate> findMultiMatch(String query, Pageable page) {
+        return repository.findMultiMatch(query,page);
+    }
 }

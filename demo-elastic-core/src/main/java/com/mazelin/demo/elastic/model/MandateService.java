@@ -8,4 +8,6 @@ public interface MandateService {
     void save(Mandate mandate);
 
     Page<Mandate> findById(String id, Pageable pageable);
+
+    Page<Mandate> findMultiMatch(String query, Pageable page);
 }

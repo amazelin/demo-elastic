@@ -16,7 +16,7 @@ public class Mandate {
     private String riskProfile;
     private Double assets;
 
-    @Field(type = FieldType.Nested)
+    @Field(type = FieldType.Nested, includeInParent = true)
     private Client client;
 
     public Mandate() {

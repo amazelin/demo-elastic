@@ -10,6 +10,8 @@
 <body>
 <div class="container">
 
+
+
     <form class="form-horizontal" id="search-form">
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
@@ -26,19 +28,53 @@
         </div>
     </div>
     </form>
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>N° mandat</th>
-                <th>Client</th>
-                <th>Offre</th>
-                <th>Structure</th>
-                <th>Profil de risque</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Offres</h3>
+                </div>
+                <div class="panel-body">
+                    <input type="checkbox" id="gsm" name="offer" value="GSM">
+                    <label for="gsm">GSM</label>
+                    <input type="checkbox" id="gao" name="offer" value="GAO">
+                    <label for="gao">GAO</label>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Structures</h3>
+                </div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Profils de risque</h3>
+                </div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>N° mandat</th>
+                    <th>Client</th>
+                    <th>Offre</th>
+                    <th>Structure</th>
+                    <th>Profil de risque</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <!--<ul class="pagination">-->
         <!--<li><a href="#">&laquo;</a></li>-->
         <!--<li><a href="#">1</a></li>-->
